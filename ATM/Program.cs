@@ -4,10 +4,15 @@ namespace ATM
 {
     public class Program
     {
-        public static Decimal Deposit(decimal balance, decimal amount)
+        public static decimal Deposit(decimal balance, decimal amount)
         {
             if (amount > 0M) return balance + amount;
             else return balance;
+        }
+
+        public static decimal Withdraw(decimal balance, decimal amount)
+        {
+            return balance - amount;
         }
 
         static void Main(string[] args)
