@@ -6,14 +6,14 @@ namespace ATM
     {
         public static decimal Deposit(decimal balance, decimal amount)
         {
-            if (amount > 0M) return balance + decimal.Floor(amount * 100)/100;
+            if (amount > 0M) return balance + decimal.Floor(amount * 100) / 100;
             else return balance;
         }
 
         public static decimal Withdraw(decimal balance, decimal amount)
         {
             if (amount > balance || amount <= 0M) return balance;
-            else return balance - amount;
+            else return balance - decimal.Floor(amount * 100) / 100;
         }
 
         static void DisplayMenu()
