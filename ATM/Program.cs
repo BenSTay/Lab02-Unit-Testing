@@ -50,6 +50,17 @@ namespace ATM
             return balance;
         }
 
+        static decimal HandleWithdraw(decimal balance)
+        {
+            decimal amount;
+            do
+            {
+                Console.Write("Please enter an amount to withdraw: $");
+            } while (!decimal.TryParse(Console.ReadLine(), out amount));
+            balance = Withdraw(balance, amount);
+            return balance;
+        }
+
         static void Main(string[] args)
         {
             bool run = true;
@@ -62,7 +73,7 @@ namespace ATM
                 switch (input)
                 {
                     case "1":
-                        
+                        Console.WriteLine($"Your current balance is ${balance}");
                         run = AnotherTransaction();
                         break;
                     case "2":
@@ -70,6 +81,7 @@ namespace ATM
                         run = AnotherTransaction();
                         break;
                     case "3":
+                        balance = HandleWithdraw(balance);
                         run = AnotherTransaction();
                         break;
                     case "4":
