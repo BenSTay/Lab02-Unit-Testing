@@ -36,5 +36,13 @@ namespace ATM_Tests
             balance = ATM.Program.Withdraw(balance, 500M);
             Assert.Equal(0M, balance);
         }
+
+        [Fact]
+        public void CantWithdrawNegative()
+        {
+            decimal balance = 0M;
+            balance = ATM.Program.Withdraw(balance, -500M);
+            Assert.Equal(0M, balance);
+        }
     }
 }
