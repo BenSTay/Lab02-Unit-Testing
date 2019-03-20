@@ -17,8 +17,7 @@ namespace ATM_Tests
         public void CantDepositNegative()
         {
             decimal balance = 0M;
-            balance = ATM.Program.Deposit(balance, -500M);
-            Assert.Equal(0M, balance);
+            Assert.Throws<Exception>(() => ATM.Program.Deposit(balance, -500M));
         }
 
         [Fact]
@@ -33,16 +32,14 @@ namespace ATM_Tests
         public void CantOverdraw()
         {
             decimal balance = 0M;
-            balance = ATM.Program.Withdraw(balance, 500M);
-            Assert.Equal(0M, balance);
+            Assert.Throws<Exception>(() => ATM.Program.Withdraw(balance, 500M));
         }
 
         [Fact]
         public void CantWithdrawNegative()
         {
             decimal balance = 0M;
-            balance = ATM.Program.Withdraw(balance, -500M);
-            Assert.Equal(0M, balance);
+            Assert.Throws<Exception>(() => ATM.Program.Withdraw(balance, -500M));
         }
 
         [Fact]

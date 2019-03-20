@@ -4,18 +4,34 @@ namespace ATM
 {
     public class Program
     {
+        /// <summary>
+        /// Adds an amount of money to the users balance.
+        /// </summary>
+        /// <param name="balance">The users balance.</param>
+        /// <param name="amount">The amount of money to add to the balance.</param>
+        /// <returns>The users updated balance.</returns>
         public static decimal Deposit(decimal balance, decimal amount)
         {
-            if (amount > 0M) return balance + decimal.Floor(amount * 100) / 100;
-            else return balance;
+            if (amount >= 0M) return balance + decimal.Floor(amount * 100) / 100;
+            else throw new Exception("You can't deposit a negative amount!");
         }
 
+        /// <summary>
+        /// Subtracts an amount of money from the users balance.
+        /// </summary>
+        /// <param name="balance">The users balance.</param>
+        /// <param name="amount">The amount of money to subtract from the balance.</param>
+        /// <returns>The users updated balance.</returns>
         public static decimal Withdraw(decimal balance, decimal amount)
         {
-            if (amount > balance || amount <= 0M) return balance;
+            if (amount < 0) throw new Exception("You can't withdraw a negative amount!");
+            if (amount > balance) throw new Exception("You can't withdraw more money than you have!");
             else return balance - decimal.Floor(amount * 100) / 100;
         }
 
+        /// <summary>
+        /// Clears the console and displays on-screen instructions.
+        /// </summary>
         static void DisplayMenu()
         {
             Console.Clear();
@@ -28,6 +44,10 @@ namespace ATM
             Console.Write("> ");
         }
 
+        /// <summary>
+        /// Asks the user if they want to perform another transaction.
+        /// </summary>
+        /// <returns>true if the user enters y, false if the user enters f.</returns>
         static bool AnotherTransaction()
         {
             string input;
@@ -39,6 +59,11 @@ namespace ATM
             return input == "y";
         }
 
+        /// <summary>
+        /// Gets the deposit amount from user input, and performs the deposit.
+        /// </summary>
+        /// <param name="balance">The users balance.</param>
+        /// <returns>The users updated balance.</returns>
         static decimal HandleDeposit(decimal balance)
         {
             decimal amount;
@@ -46,10 +71,26 @@ namespace ATM
             {
                 Console.Write("Please enter an amount to deposit: $");
             } while (!decimal.TryParse(Console.ReadLine(), out amount));
-            balance = Deposit(balance, amount);
+            try
+            {
+                balance = Deposit(balance, amount);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Transaction completed.");
+            }
             return balance;
         }
 
+        /// <summary>
+        /// Gets the withdrawal amount from user input, and performs the withdrawal.
+        /// </summary>
+        /// <param name="balance">The users balance.</param>
+        /// <returns>The users updated balance.</returns>
         static decimal HandleWithdraw(decimal balance)
         {
             decimal amount;
@@ -57,7 +98,18 @@ namespace ATM
             {
                 Console.Write("Please enter an amount to withdraw: $");
             } while (!decimal.TryParse(Console.ReadLine(), out amount));
-            balance = Withdraw(balance, amount);
+            try
+            {
+                balance = Withdraw(balance, amount);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Transaction completed.");
+            }
             return balance;
         }
 
