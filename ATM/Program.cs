@@ -12,7 +12,8 @@ namespace ATM
 
         public static decimal Withdraw(decimal balance, decimal amount)
         {
-            return balance - amount;
+            if (amount <= balance) return balance - amount;
+            else return balance;
         }
 
         static void Main(string[] args)
