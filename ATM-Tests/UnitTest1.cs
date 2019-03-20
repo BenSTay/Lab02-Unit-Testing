@@ -44,5 +44,13 @@ namespace ATM_Tests
             balance = ATM.Program.Withdraw(balance, -500M);
             Assert.Equal(0M, balance);
         }
+
+        [Fact]
+        public void DepositIgnoresSubPennies()
+        {
+            decimal balance = 0M;
+            balance = ATM.Program.Deposit(balance, 12.3456789M);
+            Assert.Equal(12.34M, balance);
+        }
     }
 }
