@@ -6,8 +6,10 @@ namespace ATM
     {
         public static Decimal Deposit(decimal balance, decimal amount)
         {
-            return balance + amount;
+            if (amount > 0M) return balance + amount;
+            else return balance;
         }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
