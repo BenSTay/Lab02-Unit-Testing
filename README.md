@@ -20,7 +20,7 @@ A command-line mock-banking application.
 
 ## Architecture
 **Languages Used**:
-* C# 7.3 (.NET Core 2.2)
+* C# 7.3 (.NET Core 2.2)  
 Written with Visual Studio Community 2017.
 
 ## Change Log
